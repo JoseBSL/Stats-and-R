@@ -39,8 +39,34 @@ swirl()
 
 #coercion numbers become characters to a R
 
+#### lesson 5 Missing values
 
+# NA-> 'NOT AVAILABLE', 'missing'
 
+#### lesson 6 subsetting vectors
 
+#is.na and !is.na
+
+#In R, the first element of a vector is cosidered element 1
+
+#subseting x[,], delete values x[-c(,)]
+
+##### lesson 7 matrices and data frames
+
+#first number rows, second number columns
+
+#matrix: atomic vector with dimensions
+
+##### lesson 8 logical expressions
+
+#&, && (non vectorized version);OR |
+
+#isTRUE()
+
+#identical()
+
+#which, any
+
+##### lesson 9 Functions
 
 
