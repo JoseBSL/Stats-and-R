@@ -48,3 +48,5 @@ mean(dat_primates_sleep)
 ?summarize
 #another different way to unlist
 dat_primates %>% summarise(mean= mean(sleep_total))
+
+
