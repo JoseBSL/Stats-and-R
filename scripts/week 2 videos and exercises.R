@@ -114,3 +114,85 @@ mean(abs(nulls)>obs)
 #alpha level is related to the confidence intervals and is selected by us
 #if we want to 95% confident, 
 
+######Exercises
+library(downloader) 
+url <- "https://raw.githubusercontent.com/genomicsclass/dagdata/master/inst/extdata/femaleControlsPopulation.csv"
+filename <- basename(url)
+download(url, destfile=filename)
+x <- unlist( read.csv(filename) )
+#1 and 2(adding one 0 to n))
+
+set.seed(1)
+n<- 1000
+vec<- vector("numeric", n)
+for(i in 1:n){
+  sam <- (sample(x, 5))
+vec[i]<- mean(sam)
+  
+}
+
+mean(abs(vec - mean(x))  > 1)
+#This is the other way that I was trying but I wasn't to put in place
+
+mean(vec>(mean(x)+1)|vec<(mean(x)-1))
+
+#3) 
+
+set.seed(1)
+n<- 1000
+vec<- vector("numeric", n)
+for(i in 1:n){
+  sam <- (sample(x, 50))
+  vec[i]<- mean(sam)}
+
+mean(abs(vec - mean(x))  > 1)
+
+
+#The interaction number almost doesn't change the random variable
+#Changes in sample size, change random variable and its distribution
+
+###Video Probability distributios
+
+#1078 heights of adult men
+#histogram with the heights->summarize of the data
+
+#F(a)=Pr(Height<=a)
+
+##### Exercises
+
+install.packages("gapminder")
+library(gapminder)
+data(gapminder)
+head(gapminder)
+
+#Now we create a vector with year 1952 and lifeExp
+library(dplyr)
+x<- filter(gapminder, year=="1952") %>% select(lifeExp) %>% unlist
+#Now hist
+#without unlist hist(x$lifeExp)
+hist(x)
+
+mean(x<=40)
+
+a<- mean(x<=60)
+b<-mean(x<=40)
+a-b
+
+#plot ecdf R 
+plot(ecdf(gapminder$lifeExp)) 
+?ecdf
+#The probability of having values lower or equal than x for a given x
+#Now we create the function
+
+prop = function(q) {
+  mean(x <= q)
+}
+prop(10)
+qs = seq(from=min(x), to=max(x), length=20)
+qs
+props = sapply(qs, prop)
+props = sapply(qs, function(q) mean(x <= q))
+plot(ecdf(x))
+plot(props)
+
+
