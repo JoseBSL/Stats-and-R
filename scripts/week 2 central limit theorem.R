@@ -149,3 +149,69 @@ set.seed(1)
 Y <- sample(y, 25)
 abs((mean(y)-mean(x))-(mean(Y)-mean(X)))
 
+####Central limit theorem video
+
+#sample average follow a normal distribution
+
+#X~N(mux,sdx/sqr(M))
+
+#With higher number of sample the spread is smaller
+
+
+#####Centrali limit theorem exercises
+
+#Exercise 1) and exercise 2)
+
+library(downloader) 
+url <- "https://raw.githubusercontent.com/genomicsclass/dagdata/master/inst/extdata/mice_pheno.csv"
+filename <- basename(url)
+download(url, destfile=filename)
+dat <- na.omit( read.csv(filename) )
+
+# For every distribution there are four commands
+#d”	returns the height of the probability density function
+#“p”	returns the cumulative density function
+#“q”	returns the inverse cumulative density function (quantiles)
+#“r”	returns randomly generated numbers
+
+pnorm(1)-pnorm(-1)
+#0.6826895
+pnorm(2)-pnorm(-2)
+#0.9544997
+
+#Exercise 3)
+
+pnorm(3)-pnorm(-3)
+#0.9973002
+
+
+#Exercise 4) Define y to be the weights of males on the control diet.
+#What proportion of the mice are within one standard deviation away from the average weight 
+#(remember to use popsd for the population sd)? 
+
+library(dplyr)
+View(dat)
+
+y<- filter(dat, Sex=="M", Diet=="chow" ) %>% select(Bodyweight) %>% unlist
+
+z<- (y-mean(y))/popsd(y)
+
+mean(abs(z)<=3)
+
+
+#)Exercise 5,6,7
+
+#)Exercise 8
+
+#)Exercise 9
+
+y <- filter(dat, Sex=="M" & Diet=="chow") %>% select(Bodyweight) %>% unlist
+set.seed(1)
+avgs <- replicate(10000, mean( sample(y, 25)))
+mypar(1,2)
+hist(avgs)
+qqnorm(avgs)
+qqline(avgs)
+
+mean(avgs)
+sd(avgs)
